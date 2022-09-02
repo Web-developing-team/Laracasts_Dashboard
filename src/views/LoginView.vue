@@ -8,17 +8,17 @@
 
             <p class="mt-1 text-center text-gray-500 dark:text-gray-400">Login or create account</p>
 
-            <form>
+            <form @submit.prevent="submit">
                <div class="w-full mt-4">
                   <input
                      class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
-                     type="email" placeholder="Email Address" aria-label="Email Address" />
+                     type="text" placeholder="Username" aria-label="Username" v-model="user.username" />
                </div>
 
                <div class="w-full mt-4">
                   <input
                      class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
-                     type="password" placeholder="Password" aria-label="Password" />
+                     type="password" placeholder="Password" aria-label="Password" v-model="user.password" />
                </div>
 
                <div class="flex items-center justify-between mt-4">
@@ -26,7 +26,7 @@
 
                   <button
                      class="px-4 py-2 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded hover:bg-gray-600 focus:outline-none"
-                     type="button">Login</button>
+                     type="submit">Login</button>
                </div>
             </form>
          </div>
@@ -39,3 +39,20 @@
       </div>
    </div>
 </template>
+
+<script setup>
+import { useUserStore } from '@/stores/user';
+import { ref } from 'vue';
+
+const user = {
+   username: '',
+   password: '',
+};
+const errorMsg = ref('');
+
+const submit = () => {
+   useUserStore.login(user)
+      .then(() => console.log('Success!'))
+      .catch(err => errorMsg.value = err.response.data.error)
+}
+</script>
