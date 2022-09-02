@@ -1,5 +1,5 @@
 <template>
-   <nav x-data="{ isOpen: false }" class="bg-white shadow w-full dark:bg-gray-800">
+   <nav x-data="{ isOpen: false }" class="bg-white shadow w-full flex items-center center h-20 dark:bg-gray-800">
       <div class="container px-6 py-4 mx-auto">
          <div class="lg:flex lg:items-center">
             <div class="flex items-center justify-between">
@@ -85,3 +85,9 @@
       </div>
    </nav>
 </template>
+
+<style scoped>
+nav {
+   clip-path: inset(-5px 0px -5px -5px);
+}
+</style>
