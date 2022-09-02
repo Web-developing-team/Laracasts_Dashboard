@@ -53,6 +53,9 @@ const errorMsg = ref('');
 const submit = () => {
    useUserStore.login(user)
       .then(() => console.log('Success!'))
-      .catch(err => errorMsg.value = err.response.data.error)
+      .catch(err => {
+         errorMsg.value = err.response.data.error
+         console.log(err)
+      })
 }
 </script>
