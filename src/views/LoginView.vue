@@ -41,8 +41,10 @@
 </template>
 
 <script setup>
-import { useUserStore } from '@/stores/user';
+import { useUserStore } from '../stores/user';
 import { ref } from 'vue';
+
+const store = useUserStore()
 
 const user = {
    username: '',
@@ -50,8 +52,8 @@ const user = {
 };
 const errorMsg = ref('');
 
-const submit = () => {
-   useUserStore.login(user)
+const submit = async () => {
+   store.login(user)
       .then(() => console.log('Success!'))
       .catch(err => {
          errorMsg.value = err.response.data.error

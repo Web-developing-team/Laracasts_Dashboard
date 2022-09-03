@@ -1,15 +1,15 @@
 import { defineStore } from "pinia";
 import axiosClient from "@/axios";
 
-export const useUserStore = defineStore({
-	id: "user",
+export const useUserStore = defineStore('user',{
 	state: () => ({
 		data: {},
 		token: "",
 	}),
+	getters: {},
 	actions: {
-		login(user) {
-			axiosClient.post("/management/auth/login", user).then(({ data }) => {
+		async login(user) {
+			return await axiosClient.post("/management/auth/login", user).then(({ data }) => {
 				this.data = data.user;
 				this.token = data.token;
 			});
