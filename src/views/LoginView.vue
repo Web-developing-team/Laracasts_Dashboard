@@ -8,7 +8,7 @@
 
             <p class="mt-1 text-center text-gray-500 dark:text-gray-400">Login or create account</p>
 
-            <form @submit.prevent="submit">
+            <form @submit.prevent="userStore.login(user)">
                <div class="w-full mt-4">
                   <input
                      class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
@@ -41,23 +41,11 @@
 </template>
 
 <script setup>
-import { useUserStore } from '../stores/user';
-import { ref } from 'vue';
+import { useUserStore } from '@/stores/user';
 
-const store = useUserStore()
-
+const userStore = useUserStore();
 const user = {
    username: '',
    password: '',
 };
-const errorMsg = ref('');
-
-const submit = async () => {
-   store.login(user)
-      .then(() => console.log('Success!'))
-      .catch(err => {
-         errorMsg.value = err.response.data.error
-         console.log(err)
-      })
-}
 </script>
